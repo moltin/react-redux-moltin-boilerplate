@@ -13,28 +13,28 @@ const Moltin = MoltinGateway({
   application: 'react-demo-store'
 });
 
-exports.GetProducts = function() {
-  return Moltin.Products.With('files, main_images, collections').All()
+exports.GetProducts = function(resources) {
+  return Moltin.Products.With(resources).All()
 };
 
 exports.GetProduct = function(ID) {
   return Moltin.Products.Get(ID)
 }
 
-exports.GetCategories = function() {
-  return Moltin.Categories.With('products').All()
+exports.GetCategories = function(resources) {
+  return Moltin.Categories.With(resources).All()
 }
 
-exports.GetCollections = function() {
-  return Moltin.Collections.With('products').All()
+exports.GetCollections = function(resources) {
+  return Moltin.Collections.With(resources).All()
 }
 
 exports.GetCategory = function(ID) {
   return Moltin.Categories.Get(ID)
 }
 
-exports.GetBrands = function() {
-  return Moltin.Brands.All()
+exports.GetBrands = function(resources) {
+  return Moltin.Brands.With(resources).All()
 }
 
 exports.GetFile = function(ID) {
