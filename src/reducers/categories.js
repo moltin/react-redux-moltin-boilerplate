@@ -14,7 +14,7 @@ const CategoriesReducer = (state=initialState, action) => {
       return {...state,
          fetching: false,
          fetched: true,
-         categories: action.payload
+         categories: action.payload.entities.categories
        };
     }
     default: {
