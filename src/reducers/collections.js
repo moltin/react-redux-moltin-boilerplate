@@ -14,7 +14,7 @@ const CollectionsReducer = (state=initialState, action) => {
       return {...state,
          fetching: false,
          fetched: true,
-         collections: action.payload
+         collections: action.payload.entities.collections
        };
     }
     default: {

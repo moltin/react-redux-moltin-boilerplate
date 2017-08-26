@@ -14,7 +14,7 @@ const ProductsReducer = (state=initialState, action) => {
       return {...state,
          fetching: false,
          fetched: true,
-         products: action.payload
+         products: action.payload.entities.products
        };
     }
     default: {
