@@ -4,12 +4,15 @@ import * as schema from './schema';
 export const Update_Quantity = 'Update_Quantity';
 export const Fetch_Products_Start = 'Fetch_Products_Start';
 export const Fetch_Products_End = 'Fetch_Products_End';
+export const Fetch_Products_Error = 'Fetch_Products_Error';
 export const Fetch_Categories_Start = 'Fetch_Categories_Start';
 export const Fetch_Categories_End = 'Fetch_Categories_End';
+export const Fetch_Categories_Error = 'Fetch_Categories_Error';
 export const Initial_Style = 'Initial_Style';
 export const Change_Style = 'Change_Style';
 export const Fetch_Collections_Start = 'Fetch_Collections_Start';
 export const Fetch_Collections_End = 'Fetch_Collections_End';
+export const Fetch_Collections_Error = 'Fetch_Collections_Error';
 export const Fetch_Cart_Start = 'Fetch_Cart_Start';
 export const Fetch_Cart_End = 'Fetch_Cart_End';
 
@@ -35,6 +38,13 @@ export function FetchProductsEnd(data) {
   }
 };
 
+export function FetchProductsError(error) {
+  return {
+    type: Fetch_Products_Error,
+    payload: error
+  }
+};
+
 export function GetProducts() {
   return function (dispatch) {
       
@@ -46,6 +56,10 @@ export function GetProducts() {
           let normalized_products = normalize(products.data, schema.arrayOfProducts);
           dispatch(FetchProductsEnd(normalized_products))
         }) 
+        
+        .catch((e) => {
+          dispatch(FetchProductsError(e))
+        })
     }
 };
 
@@ -62,6 +76,13 @@ export function FetchCategoriesEnd(data) {
   }
 };
 
+export function FetchCategoriesError(error) {
+  return {
+    type: Fetch_Categories_Error,
+    payload: error
+  }  
+}
+
 export function GetCategories() {
   return function (dispatch) {
       
@@ -72,6 +93,10 @@ export function GetCategories() {
         .then((categories) => {
           let normalized_categories = normalize(categories.data, schema.arrayOfCategories);
           dispatch(FetchCategoriesEnd(normalized_categories))
+        })
+        
+        .catch((e) => {
+          dispatch(FetchCategoriesError(e))
         }) 
     }
 };
@@ -89,6 +114,13 @@ export function FetchCollectionsEnd(data) {
   }
 };
 
+export function FetchCollectionsError(error) {
+  return {
+    type: Fetch_Collections_Error,
+    payload: error
+  }
+};
+
 export function GetCollections() {
   return function (dispatch) {
       
@@ -100,6 +132,10 @@ export function GetCollections() {
           let normalized_collections = normalize(collections.data, schema.arrayOfCollections);
           dispatch(FetchCollectionsEnd(normalized_collections))
         }) 
+        
+        .catch((e) => {
+          dispatch(FetchCollectionsError(e))
+        })
     }
 };
 

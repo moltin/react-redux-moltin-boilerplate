@@ -4,7 +4,7 @@ const initialState = fromJS({
   fetching: false,
   fetched: false,
   collections: null,
-  error: null
+  error: false
 });
 
 const CollectionsReducer = (state= fromJS(initialState), action) => {
@@ -24,8 +24,16 @@ const CollectionsReducer = (state= fromJS(initialState), action) => {
          collections: action.payload.entities.collections
        });
     }
+    case "Fetch_Collections_Error": {
+      return state.merge({
+         fetching: false,
+         fetched: false,
+         collections: action.payload,
+         error: true
+       });
+    }
     default: {
-      return state.merge({fetching: false});
+      return state;
     }
   }
 };

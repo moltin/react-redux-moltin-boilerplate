@@ -19,8 +19,16 @@ const CategoriesReducer = (state=initialState, action) => {
          categories: action.payload.entities.categories
        });
     }
+    case "Fetch_Categories_Error": {
+      return state.merge({
+         fetching: false,
+         fetched: true,
+         categories: action.payload,
+         error: true
+       });
+    }
     default: {
-      return state.merge({fetching: false});
+      return state;
     }
   }
 };

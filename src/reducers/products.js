@@ -19,8 +19,16 @@ const ProductsReducer = (state=initialState, action) => {
          products: action.payload.entities.products
        });
     }
+    case "Fetch_Products_Error": {
+      return state.merge({
+         fetching: false,
+         fetched: false,
+         products: action.payload,
+         error: true
+       });
+    }
     default: {
-      return state.merge({fetching: false, error: true});
+      return state.merge({error: true});
     }
   }
 };
