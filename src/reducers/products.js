@@ -10,7 +10,7 @@ const initialState = fromJS({
 const ProductsReducer = (state=initialState, action) => {
   switch (action.type) {
     case "Fetch_Products_Start": {
-      return state.merge({fetching: true, error: null});
+      return state.merge({fetching: true});
     }
     case "Fetch_Products_End": {
       return state.merge({
@@ -28,7 +28,7 @@ const ProductsReducer = (state=initialState, action) => {
        });
     }
     default: {
-      return state.merge({error: true});
+      return state;
     }
   }
 };

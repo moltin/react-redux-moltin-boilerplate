@@ -4,7 +4,7 @@ const initialState = fromJS({
   fetching: false,
   fetched: false,
   categories: null,
-  error: null
+  error: false
 });
 
 const CategoriesReducer = (state=initialState, action) => {

@@ -12,9 +12,6 @@ const CollectionsReducer = (state= fromJS(initialState), action) => {
   switch (action.type) {
 
     case "Fetch_Collections_Start": {
-      
-      console.log("Fetch_Collections_Start event fired")
-      
       return state.merge({fetching: true});
     }
     case "Fetch_Collections_End": {
