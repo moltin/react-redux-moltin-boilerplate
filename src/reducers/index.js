@@ -1,7 +1,9 @@
 import { reducer as formReducer } from 'redux-form';
 
-//import the function we need to combine multiple redux reducers
-import { combineReducers } from 'redux';
+//import the function we need to combine multiple immutable redux reducers
+import {
+  combineReducers
+} from 'redux-immutable';
 
 // import our individual reducers so we can combine them
 import products from './products';

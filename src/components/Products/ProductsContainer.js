@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux';
-
 import { GetProducts } from '../../actions/actions.js';
 
 const mapStateToProps = state => {
   return {
-    products: state.products
+    products: state.get("products").toJS()
   }
 }
 

@@ -2,15 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { GetProducts, GetCollections, GetCategories } from '../../actions/actions.js';
 
-function mapStateToProps(state) {
-    return(state)
+const mapStateToProps = state => {
+  return {
+    collections: state.get("collections").toJS(),
+    products: state.get("products").toJS(),
+    categories: state.get("categories").toJS()
+  }
 }
 
 class HomeContainer extends Component {
   
   // a react lifecycle event, read more at http://busypeoples.github.io/post/react-component-lifecycle/
   componentDidMount() {
-
+  
     const boundGetProducts = () => {
       this.props.dispatch((dispatch) => {
           dispatch(GetProducts())
@@ -38,15 +42,17 @@ class HomeContainer extends Component {
     if(this.props.categories.fetched === false) {
         boundGetCategories();  
       }
-
+      
     // then collections
     if(this.props.collections.fetched === false) {
-      boundGetCollections();
+     boundGetCollections();  
+    
     }
 
   }
 
   render() {
+    
     if(this.props.collections.collections !== null && this.props.products.products !== null && this.props.categories.categories !== null) {
       return (
         <div>

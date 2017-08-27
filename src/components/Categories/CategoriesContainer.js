@@ -1,5 +1,13 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import { GetProducts, GetCategories } from '../../actions/actions.js';
+
+const mapStateToProps = state => {
+  return {
+    products: state.get("products").toJS(),
+    categories: state.get("categories").toJS()
+  }
+}
 
 class CategoriesContainer extends Component {
 
@@ -38,4 +46,4 @@ class CategoriesContainer extends Component {
   }
 };
 
-export default CategoriesContainer;
+export default connect(mapStateToProps)(CategoriesContainer);

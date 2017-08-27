@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { GetProducts } from '../../actions/actions.js';
 
-function mapStateToProps(state) {
-  return state
+const mapStateToProps = state => {
+  return {
+    products: state.get("products").toJS()
+  }
 }
 
 class Product extends Component {

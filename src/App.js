@@ -22,7 +22,7 @@ import history from './history';
 
 // map the redux store (lives in state) to our components props
 const mapStateToProps = state => {
-  return state
+  return {state}
 }
 
 // initialize our component

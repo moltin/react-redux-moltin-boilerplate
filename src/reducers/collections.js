@@ -1,24 +1,31 @@
-const initialState = {
+import { fromJS } from 'immutable';
+
+const initialState = fromJS({
   fetching: false,
   fetched: false,
   collections: null,
   error: null
-}
+});
 
-const CollectionsReducer = (state=initialState, action) => {
+const CollectionsReducer = (state= fromJS(initialState), action) => {
+  
   switch (action.type) {
+
     case "Fetch_Collections_Start": {
-      return {...state, fetching: true};
+      
+      console.log("Fetch_Collections_Start event fired")
+      
+      return state.merge({fetching: true});
     }
     case "Fetch_Collections_End": {
-      return {...state,
+      return state.merge({
          fetching: false,
          fetched: true,
          collections: action.payload.entities.collections
-       };
+       });
     }
     default: {
-      return {...state, fetching: false, error: action.payload};
+      return state.merge({fetching: false});
     }
   }
 };
