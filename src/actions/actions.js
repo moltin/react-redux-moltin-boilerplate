@@ -1,6 +1,3 @@
-import { normalize } from 'normalizr';
-import * as schema from './schema';
-
 export const Update_Quantity = 'Update_Quantity';
 export const Fetch_Products_Start = 'Fetch_Products_Start';
 export const Fetch_Products_End = 'Fetch_Products_End';
@@ -43,8 +40,7 @@ export function GetProducts() {
       return api.GetProducts()
       
         .then((products) => {
-          let normalized_products = normalize(products.data, schema.arrayOfProducts);
-          dispatch(FetchProductsEnd(normalized_products))
+          dispatch(FetchProductsEnd(products))
         }) 
     }
 };
@@ -70,8 +66,7 @@ export function GetCategories() {
       return api.GetCategories()
       
         .then((categories) => {
-          let normalized_categories = normalize(categories.data, schema.arrayOfCategories);
-          dispatch(FetchCategoriesEnd(normalized_categories))
+          dispatch(FetchCategoriesEnd(categories))
         }) 
     }
 };
@@ -97,8 +92,7 @@ export function GetCollections() {
       return api.GetCollections()
       
         .then((collections) => {
-          let normalized_collections = normalize(collections.data, schema.arrayOfCollections);
-          dispatch(FetchCollectionsEnd(normalized_collections))
+          dispatch(FetchCollectionsEnd(collections))
         }) 
     }
 };
