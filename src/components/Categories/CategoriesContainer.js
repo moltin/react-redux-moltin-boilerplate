@@ -1,5 +1,10 @@
 import React, {Component} from 'react';
-import { GetProducts, GetCategories } from '../../actions/actions.js';
+import { GetCategories } from '../../actions/actions.js';
+import { connect } from 'react-redux';
+
+const mapStateToProps = state => {
+  return state;
+};
 
 class CategoriesContainer extends Component {
 
@@ -8,22 +13,11 @@ class CategoriesContainer extends Component {
       
       const boundGetCategories = () => {
         this.props.dispatch((dispatch) => {
-            dispatch(GetCategories())
+            dispatch(GetCategories('products'))
         })
       }
 
-      const boundGetProducts = () => {
-        this.props.dispatch((dispatch) => {
-            dispatch(GetProducts())
-        })
-      }
-      
-      // check if we already have a moltin products in the store
-      if(this.props.products.fetched === false) {
-        boundGetProducts()
-      }
-      
-      // check if we already have a moltin products in the store
+      // check if we already have moltin categories in the store
       if(this.props.categories.fetched === false) {
         boundGetCategories();  
       }
@@ -38,4 +32,4 @@ class CategoriesContainer extends Component {
   }
 };
 
-export default CategoriesContainer;
+export default connect(mapStateToProps)(CategoriesContainer);

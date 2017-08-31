@@ -13,7 +13,7 @@ class HomeContainer extends Component {
 
     const boundGetProducts = () => {
       this.props.dispatch((dispatch) => {
-          dispatch(GetProducts())
+          dispatch(GetProducts('files, main_images, collections'))
       })
     }
     
