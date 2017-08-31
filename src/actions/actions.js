@@ -32,12 +32,13 @@ export function FetchProductsEnd(data) {
   }
 };
 
-export function GetProducts() {
+export function GetProducts(resources) {
+  
   return function (dispatch) {
       
       dispatch(FetchProductsStart())
 
-      return api.GetProducts()
+      return api.GetProducts(resources)
       
         .then((products) => {
           dispatch(FetchProductsEnd(products))
@@ -58,12 +59,12 @@ export function FetchCategoriesEnd(data) {
   }
 };
 
-export function GetCategories() {
+export function GetCategories(resources) {
   return function (dispatch) {
       
       dispatch(FetchCategoriesStart())
 
-      return api.GetCategories()
+      return api.GetCategories(resources)
       
         .then((categories) => {
           dispatch(FetchCategoriesEnd(categories))
@@ -84,12 +85,12 @@ export function FetchCollectionsEnd(data) {
   }
 };
 
-export function GetCollections() {
+export function GetCollections(resources) {
   return function (dispatch) {
       
       dispatch(FetchCollectionsStart())
 
-      return api.GetCollections()
+      return api.GetCollections(resources)
       
         .then((collections) => {
           dispatch(FetchCollectionsEnd(collections))
