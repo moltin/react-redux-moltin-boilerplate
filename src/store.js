@@ -19,6 +19,9 @@ import rootReducer from './ducks';
 // import the Moltin API SDK
 import api from './utils/moltin';
 
+// create and export history for router
+export const history = createHistory();
+
 // combine the middlewares we're using into a constant so that it can be used by our store
 const middleware = [thunk.withExtraArgument(api), routerMiddleware(history)];
 
@@ -41,7 +44,5 @@ const composedEnhancers = compose(applyMiddleware(...middleware), ...enhancers);
 
 // create our redux store using our rootReducer and our middleware, and export it for use in index.js
 const store = createStore(rootReducer, composedEnhancers);
-
-export const history = createHistory();
 
 export default store;
