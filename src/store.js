@@ -11,7 +11,7 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import {routerMiddleware} from 'react-router-redux';
 
 // import the already combined reducers for redux to use
-import reducer from './reducers';
+import reducers from './ducks';
 
 // import ability to create a browser history for our router to use
 import history from './history';
@@ -23,4 +23,4 @@ import api from './utils/moltin';
 const middleware = compose(applyMiddleware(thunk.withExtraArgument(api), createLogger(), routerMiddleware(history)));
 
 // create our redux store using our reducers and our middleware, and export it for use in index.js
-export default createStore(reducer, middleware);
+export default createStore(reducers, middleware);
