@@ -1,6 +1,8 @@
 # React/redux moltin boilerplate
 
-The purpose of this project is to provide you with an out of the box setup for redux, react and moltin to play together. It comes with:
+The purpose of this project is to provide you with an out of the box setup for redux, react and moltin to play together.
+
+## What's in the box?
 
 * `./utils/moltin`: exported moltin API functions via the JS SDK
 
