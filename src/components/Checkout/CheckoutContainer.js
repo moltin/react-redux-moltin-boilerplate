@@ -1,31 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
+import {connect} from 'react-redux';
 
-import { connect } from 'react-redux';
-
-function mapStateToProps(state) {
-  return state;
+const CheckoutContainer = ({payments}) => {
+  if (payments.processing === false) {
+    return <div />;
+  } else {
+    return <div />;
+  }
 };
 
-class CheckoutContainer extends Component {
-
-  render() {
-    if(this.props.payments.processing === false) {
-      return (
-        <div>
-        
-        </div>
-      )
-    }
-
-    else {
-      return (
-        <div>
-        
-        </div>
-      )
-    }
-
-  };
-};
+const mapStateToProps = ({payments}) => ({
+  payments
+});
 
 export default connect(mapStateToProps)(CheckoutContainer);

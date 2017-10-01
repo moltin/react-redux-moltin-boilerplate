@@ -1,65 +1,55 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { GetProducts, GetCollections, GetCategories } from '../../actions/actions.js';
-
-function mapStateToProps(state) {
-    return(state)
-}
+import React, {Component} from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {GetProducts} from '../../ducks/products';
+import {GetCollections} from '../../ducks/collections';
+import {GetCategories} from '../../ducks/categories';
 
 class HomeContainer extends Component {
-  
-  // a react lifecycle event, read more at http://busypeoples.github.io/post/react-component-lifecycle/
   componentDidMount() {
-
-    const boundGetProducts = () => {
-      this.props.dispatch((dispatch) => {
-          dispatch(GetProducts('files, main_images, collections'))
-      })
-    }
-    
-    const boundGetCategories = () => {
-      this.props.dispatch((dispatch) => {
-          dispatch(GetCategories())
-      })
-    }
-    
-    const boundGetCollections = () => {
-      this.props.dispatch((dispatch) => {
-          dispatch(GetCollections())
-      })
-    }
-  
     // check if we already have a moltin products in the store
-    if(this.props.products.fetched === false) {
-      boundGetProducts()
+    if (this.props.products.fetched === false) {
+      this.props.GetProducts('files, main_images, collections');
     }
 
     // now we do the same thing for categories
-    if(this.props.categories.fetched === false) {
-        boundGetCategories();  
-      }
-
-    // then collections
-    if(this.props.collections.fetched === false) {
-      boundGetCollections();
+    if (this.props.categories.fetched === false) {
+      this.props.GetCategories();
     }
 
+    // then collections
+    if (this.props.collections.fetched === false) {
+      this.props.GetCollections();
+    }
   }
 
   render() {
-    if(this.props.collections.collections !== null && this.props.products.products !== null && this.props.categories.categories !== null) {
-      return (
-        <div>
-        </div>
-      );
-    }
-    else {
-      return (
-        <div>
-        </div>
-      );
+    if (
+      this.props.collections.collections !== null &&
+      this.props.products.products !== null &&
+      this.props.categories.categories !== null
+    ) {
+      return <div />;
+    } else {
+      return <div />;
     }
   }
 }
 
-export default connect(mapStateToProps)(HomeContainer);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      GetCollections,
+      GetCategories,
+      GetProducts
+    },
+    dispatch
+  );
+
+const mapStateToProps = ({collections, categories, products}) => ({
+  collections,
+  categories,
+  products
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);

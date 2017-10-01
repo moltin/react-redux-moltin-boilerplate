@@ -1,64 +1,45 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { GetCart, GetProducts } from '../../actions/actions.js';
-
-function mapStateToProps(state) {
-    return(state)
-}
+import React, {Component} from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {GetCart} from '../../ducks/cart';
+import {GetProducts} from '../../ducks/products';
 
 class Cart extends Component {
-
   componentDidMount() {
-    
-    const boundGetCart = () => {
-      this.props.dispatch((dispatch) => {
-          dispatch(GetCart())
-      })
-    }
-    
-    const boundGetProducts = () => {
-      this.props.dispatch((dispatch) => {
-          dispatch(GetProducts())
-      })
-    }
-
-    boundGetCart();
-    
-    boundGetProducts();
-    
-  };
+    this.props.GetCart();
+    this.props.GetProducts();
+  }
 
   render() {
-
-    if(this.props.cart.fetched === true && this.props.cart.fetching === false && this.props.products.fetched === true) {
+    if (
+      this.props.cart.fetched === true &&
+      this.props.cart.fetching === false &&
+      this.props.products.fetched === true
+    ) {
       // is there anything actually in the cart
-      if(this.props.cart.cart.data[0]) {
-
-        return (
-          <div>
-          
-          </div>
-        )
+      if (this.props.cart.cart.data[0]) {
+        return <div />;
+      } else {
+        return <div />;
       }
-
-      else {
-        return (
-          <div>
-
-          </div>
-        )
-      }
+    } else {
+      return <div />;
     }
+  }
+}
 
-    else {
-      return (
-        <div>
-        
-        </div>
-      )
-    }
+const mapStateToProps = ({cart, products}) => ({
+  cart,
+  products
+});
 
-  };
-};
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      GetProducts,
+      GetCart
+    },
+    dispatch
+  );
 
-export default connect(mapStateToProps)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
