@@ -1,24 +1,13 @@
 import React, {Component} from 'react';
+import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {GetProducts} from '../../ducks/products';
 
-const mapStateToProps = state => {
-  return state;
-};
-
 class ProductsContainer extends Component {
-  // a react lifecycle event, read more at http://busypeoples.github.io/post/react-component-lifecycle/
   componentDidMount() {
-    // bind out GetProducts function to dispatch
-    const boundGetProducts = () => {
-      this.props.dispatch(dispatch => {
-        dispatch(GetProducts());
-      });
-    };
-
     // check if we already have a moltin products in the store
     if (this.props.products.fetched === false) {
-      boundGetProducts();
+      this.props.GetProducts();
     }
   }
 
@@ -32,4 +21,16 @@ class ProductsContainer extends Component {
   }
 }
 
-export default connect(mapStateToProps)(ProductsContainer);
+const mapStateToProps = ({products}) => ({
+  products
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      GetProducts
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsContainer);
