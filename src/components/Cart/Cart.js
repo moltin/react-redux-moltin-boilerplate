@@ -1,29 +1,13 @@
 import React, {Component} from 'react';
+import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {GetCart} from '../../ducks/cart';
 import {GetProducts} from '../../ducks/products';
 
-function mapStateToProps(state) {
-  return state;
-}
-
 class Cart extends Component {
   componentDidMount() {
-    const boundGetCart = () => {
-      this.props.dispatch(dispatch => {
-        dispatch(GetCart());
-      });
-    };
-
-    const boundGetProducts = () => {
-      this.props.dispatch(dispatch => {
-        dispatch(GetProducts());
-      });
-    };
-
-    boundGetCart();
-
-    boundGetProducts();
+    this.props.GetCart();
+    this.props.GetProducts();
   }
 
   render() {
@@ -44,4 +28,18 @@ class Cart extends Component {
   }
 }
 
-export default connect(mapStateToProps)(Cart);
+const mapStateToProps = ({cart, products}) => ({
+  cart,
+  products
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      GetProducts,
+      GetCart
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
