@@ -1,5 +1,5 @@
-export const FETCH_CATEGORIES_START = 'FETCH_CATEGORIES_START';
-export const FETCH_CATEGORIES_END = 'FETCH_CATEGORIES_END';
+export const FETCH_CATEGORIES_START = 'categories/FETCH_CATEGORIES_START';
+export const FETCH_CATEGORIES_END = 'categories/FETCH_CATEGORIES_END';
 
 const initialState = {
   fetching: false,
@@ -11,7 +11,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH_CATEGORIES_START:
-      return {...state, fetching: true};
+      return { ...state, fetching: true };
 
     case FETCH_CATEGORIES_END:
       return {
@@ -22,24 +22,20 @@ export default (state = initialState, action) => {
       };
 
     default:
-      return {...state, fetching: false, error: action.payload};
+      return { ...state, fetching: false, error: action.payload };
   }
 };
 
-export function FetchCategoriesStart() {
-  return {
-    type: FETCH_CATEGORIES_START
-  };
-}
+export const FetchCategoriesStart = () => ({
+  type: FETCH_CATEGORIES_START
+});
 
-export function FetchCategoriesEnd(data) {
-  return {
-    type: FETCH_CATEGORIES_END,
-    payload: data
-  };
-}
+export const FetchCategoriesEnd = data => ({
+  type: FETCH_CATEGORIES_END,
+  payload: data
+});
 
-export function GetCategories(resources) {
+export const GetCategories = resources => {
   return function(dispatch, getState, api) {
     dispatch(FetchCategoriesStart());
 
@@ -47,4 +43,4 @@ export function GetCategories(resources) {
       dispatch(FetchCategoriesEnd(categories));
     });
   };
-}
+};

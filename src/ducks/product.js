@@ -7,16 +7,14 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_QUANTITY:
-      return {...state, quantity: action.payload};
+      return { ...state, quantity: action.payload };
 
     default:
-      return {...state};
+      return { ...state };
   }
 };
 
-export function updateQuantity(quantity) {
-  return {
-    type: UPDATE_QUANTITY,
-    payload: quantity
-  };
-}
+export const updateQuantity = quantity => ({
+  type: UPDATE_QUANTITY,
+  payload: quantity
+});

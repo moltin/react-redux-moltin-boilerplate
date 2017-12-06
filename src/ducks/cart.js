@@ -1,5 +1,5 @@
-export const FETCH_CART_START = 'FETCH_CART_START';
-export const FETCH_CART_END = 'FETCH_CART_END';
+export const FETCH_CART_START = 'cart/FETCH_CART_START';
+export const FETCH_CART_END = 'cart/FETCH_CART_END';
 
 const initialState = {
   cart: null,
@@ -29,31 +29,27 @@ export default (state = initialState, action) => {
         newQuantity: action.gotNew
       };
 
-    case 'Cart_Updated': // Not used?
+    case 'Cart_Updated':
       return {
         ...state,
         newQuantity: action.gotNew
       };
 
     default:
-      return {...state, error: action.payload, newQuantity: false};
+      return { ...state, error: action.payload, newQuantity: false };
   }
 };
 
-export function FetchCartStart() {
-  return {
-    type: FETCH_CART_START
-  };
-}
+export const FetchCartStart = () => ({
+  type: FETCH_CART_START
+});
 
-export function FetchCartEnd(cart) {
-  return {
-    type: FETCH_CART_END,
-    payload: cart
-  };
-}
+export const FetchCartEnd = cart => ({
+  type: FETCH_CART_END,
+  payload: cart
+});
 
-export function GetCart() {
+export const GetCart = () => {
   return function(dispatch, getState, api) {
     dispatch(FetchCartStart());
 
@@ -61,4 +57,4 @@ export function GetCart() {
       dispatch(FetchCartEnd(cart));
     });
   };
-}
+};
