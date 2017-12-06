@@ -1,5 +1,5 @@
-export const FETCH_COLLECTIONS_START = 'FETCH_COLLECTIONS_START';
-export const FETCH_COLLECTIONS_END = 'FETCH_COLLECTIONS_END';
+export const FETCH_COLLECTIONS_START = 'collections/FETCH_COLLECTIONS_START';
+export const FETCH_COLLECTIONS_END = 'collections/FETCH_COLLECTIONS_END';
 
 const initialState = {
   fetching: false,
@@ -11,7 +11,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH_COLLECTIONS_START:
-      return {...state, fetching: true};
+      return { ...state, fetching: true };
 
     case FETCH_COLLECTIONS_END:
       return {
@@ -22,24 +22,20 @@ export default (state = initialState, action) => {
       };
 
     default:
-      return {...state, fetching: false, error: action.payload};
+      return { ...state, fetching: false, error: action.payload };
   }
 };
 
-export function FetchCollectionsStart() {
-  return {
-    type: FETCH_COLLECTIONS_START
-  };
-}
+export const FetchCollectionsStart = () => ({
+  type: FETCH_COLLECTIONS_START
+});
 
-export function FetchCollectionsEnd(data) {
-  return {
-    type: FETCH_COLLECTIONS_END,
-    payload: data
-  };
-}
+export const FetchCollectionsEnd = data => ({
+  type: FETCH_COLLECTIONS_END,
+  payload: data
+});
 
-export function GetCollections(resources) {
+export const GetCollections = resources => {
   return function(dispatch, getState, api) {
     dispatch(FetchCollectionsStart());
 
@@ -47,4 +43,4 @@ export function GetCollections(resources) {
       dispatch(FetchCollectionsEnd(collections));
     });
   };
-}
+};
